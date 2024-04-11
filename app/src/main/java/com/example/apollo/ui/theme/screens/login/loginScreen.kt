@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -33,13 +35,15 @@ import com.example.apollo.ui.theme.ApolloTheme
 @Composable
 fun LoginScreen(navController: NavController){
     Column (
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.background(color = Color.Yellow)
     ){
         Text(
-            text = "Log In",
+            text = "PLEASE LOG IN HERE",
             fontSize = 30.sp,
-            color = Color.Blue,
-            fontWeight = FontWeight.ExtraBold
+            color = Color.Red,
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = FontFamily.Cursive
         )
         Spacer(modifier = Modifier.height(40.dp))
         TextFieldComponent(myLabel = "Enter your email address")
@@ -65,6 +69,7 @@ fun LoginScreen(navController: NavController){
         }
     }
 }
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TextFieldComponent(myLabel: String){
     var text by remember {
@@ -80,8 +85,8 @@ fun TextFieldComponent(myLabel: String){
         )
         .clip(
             shape = RoundedCornerShape(20.dp)
-        )
-        .background(color = Color.Magenta),
+        ),
+        colors = TextFieldDefaults.textFieldColors(Color.Magenta),
         value = text, onValueChange = {
                 newText -> text = newText // does the observation of the input field
         },
