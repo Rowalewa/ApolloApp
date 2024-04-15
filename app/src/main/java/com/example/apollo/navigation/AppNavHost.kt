@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.ui.theme.screens.about.AboutScreen
+import com.example.apollo.ui.theme.screens.contact.ContactScreen
 import com.example.apollo.ui.theme.screens.home.HomeScreen
 import com.example.apollo.ui.theme.screens.login.LoginScreen
 import com.example.apollo.ui.theme.screens.register.RegisterScreen
@@ -32,6 +33,9 @@ fun AppNavHost(modifier: Modifier = Modifier,
         }
         composable(ROUTE_REGISTER){
             RegisterScreen(navController)
+        }
+        composable(ROUTE_CONTACTS){
+            ContactScreen(navController)
         }
     }
 }

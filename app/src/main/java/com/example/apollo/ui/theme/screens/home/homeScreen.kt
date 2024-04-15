@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.navigation.ROUTE_ABOUT
+import com.example.apollo.navigation.ROUTE_CONTACTS
 import com.example.apollo.navigation.ROUTE_LOGIN
 import com.example.apollo.navigation.ROUTE_REGISTER
 import com.example.apollo.ui.theme.ApolloTheme
@@ -92,6 +93,23 @@ fun HomeScreen(navController: NavController){
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.Red
+            )
+        }
+        Button(
+            onClick = { navController.navigate(ROUTE_CONTACTS) },
+            colors = ButtonDefaults.buttonColors(Color.Gray),
+            modifier = Modifier.fillMaxWidth()
+                .padding(
+                    top = 0.dp,
+                    start = 10.dp,
+                    end = 20.dp,
+                    bottom = 0.dp
+                )
+        ) {
+            Text(text = "Contacts",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.ExtraBold,
+                color = Color.White
             )
         }
     }
