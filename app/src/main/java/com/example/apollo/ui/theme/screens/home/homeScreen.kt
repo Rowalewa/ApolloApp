@@ -44,9 +44,77 @@ fun HomeScreen(navController: NavController){
             fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily.Serif
         )
+//        Button(
+//            onClick = { navController.navigate(ROUTE_ABOUT) },
+//            colors = ButtonDefaults.buttonColors(Color.Blue),
+//            modifier = Modifier.fillMaxWidth()
+//                .padding(
+//                    top = 0.dp,
+//                    start = 10.dp,
+//                    end = 20.dp,
+//                    bottom = 0.dp
+//                )
+//        ) {
+//            Text(text = "About",
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.ExtraBold,
+//                color = Color.Red
+//            )
+//        }
+//        Button(
+//            onClick = { navController.navigate(ROUTE_LOGIN) },
+//            colors = ButtonDefaults.buttonColors(Color.Cyan),
+//            modifier = Modifier.fillMaxWidth()
+//                .padding(
+//                    top = 0.dp,
+//                    start = 10.dp,
+//                    end = 20.dp,
+//                    bottom = 0.dp
+//                )
+//        ) {
+//            Text(text = "Log In",
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.ExtraBold,
+//                color = Color.Red
+//            )
+//        }
+//        Button(
+//            onClick = { navController.navigate(ROUTE_REGISTER) },
+//            colors = ButtonDefaults.buttonColors(Color.Green),
+//            modifier = Modifier.fillMaxWidth()
+//                .padding(
+//                    top = 0.dp,
+//                    start = 10.dp,
+//                    end = 20.dp,
+//                    bottom = 0.dp
+//                )
+//        ) {
+//            Text(text = "Register",
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.ExtraBold,
+//                color = Color.Red
+//            )
+//        }
+//        Button(
+//            onClick = { navController.navigate(ROUTE_CONTACTS) },
+//            colors = ButtonDefaults.buttonColors(Color.Gray),
+//            modifier = Modifier.fillMaxWidth()
+//                .padding(
+//                    top = 0.dp,
+//                    start = 10.dp,
+//                    end = 20.dp,
+//                    bottom = 0.dp
+//                )
+//        ) {
+//            Text(text = "Contacts",
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.ExtraBold,
+//                color = Color.White
+//            )
+//        }
         Button(
-            onClick = { navController.navigate(ROUTE_ABOUT) },
-            colors = ButtonDefaults.buttonColors(Color.Blue),
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(Color.Yellow),
             modifier = Modifier.fillMaxWidth()
                 .padding(
                     top = 0.dp,
@@ -55,15 +123,15 @@ fun HomeScreen(navController: NavController){
                     bottom = 0.dp
                 )
         ) {
-            Text(text = "About",
+            Text(text = "Add Product",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
-                color = Color.Red
+                color = Color.Black
             )
         }
         Button(
-            onClick = { navController.navigate(ROUTE_LOGIN) },
-            colors = ButtonDefaults.buttonColors(Color.Cyan),
+            onClick = { /*TODO*/ },
+            colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier.fillMaxWidth()
                 .padding(
                     top = 0.dp,
@@ -72,41 +140,7 @@ fun HomeScreen(navController: NavController){
                     bottom = 0.dp
                 )
         ) {
-            Text(text = "Log In",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.Red
-            )
-        }
-        Button(
-            onClick = { navController.navigate(ROUTE_REGISTER) },
-            colors = ButtonDefaults.buttonColors(Color.Green),
-            modifier = Modifier.fillMaxWidth()
-                .padding(
-                    top = 0.dp,
-                    start = 10.dp,
-                    end = 20.dp,
-                    bottom = 0.dp
-                )
-        ) {
-            Text(text = "Register",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.ExtraBold,
-                color = Color.Red
-            )
-        }
-        Button(
-            onClick = { navController.navigate(ROUTE_CONTACTS) },
-            colors = ButtonDefaults.buttonColors(Color.Gray),
-            modifier = Modifier.fillMaxWidth()
-                .padding(
-                    top = 0.dp,
-                    start = 10.dp,
-                    end = 20.dp,
-                    bottom = 0.dp
-                )
-        ) {
-            Text(text = "Contacts",
+            Text(text = "View Product",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.ExtraBold,
                 color = Color.White
@@ -118,7 +152,7 @@ fun HomeScreen(navController: NavController){
 @Preview(
     showSystemUi = true,
     showBackground = true,
-    name = "Hme Screen Preview"
+    name = "Home Screen Preview"
 )
 @Composable
 fun HomeScreenPreview(){

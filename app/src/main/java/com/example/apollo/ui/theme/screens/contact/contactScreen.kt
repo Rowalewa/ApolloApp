@@ -1,6 +1,8 @@
 package com.example.apollo.ui.theme.screens.contact
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -124,6 +126,9 @@ fun ContactScreen(navController: NavController){
                     start = 20.dp,
                     end = 20.dp,
                     bottom = 0.dp
+                )
+                .border(border = BorderStroke(width = 5.dp, color = Color.Magenta),
+                    shape = RoundedCornerShape(20.dp)
                 )
         ) {
             Text(text = "Home Screen",
