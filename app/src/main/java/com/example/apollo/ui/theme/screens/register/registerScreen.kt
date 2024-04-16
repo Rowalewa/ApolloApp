@@ -59,11 +59,12 @@ fun RegisterScreen(navController: NavController) {
         mutableStateOf(TextFieldValue(""))
     }
     var context = LocalContext.current
+
     Box() {
         Image(
             painter = painterResource(id = R.drawable.curved_wallpaper),
             contentDescription = "curved background",
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.matchParentSize()
         )
     }
     Column (
@@ -88,7 +89,8 @@ fun RegisterScreen(navController: NavController) {
                 )
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(8.dp)
         )
         OutlinedTextField(
@@ -99,7 +101,8 @@ fun RegisterScreen(navController: NavController) {
             )
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(8.dp)
         )
         OutlinedTextField(
@@ -110,7 +113,8 @@ fun RegisterScreen(navController: NavController) {
             )
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(8.dp)
         )
         Button(onClick = {
@@ -119,8 +123,7 @@ fun RegisterScreen(navController: NavController) {
                 email.text.trim(),
                 pass.text.trim(),
                 confpass.text.trim()
-            )
-            navController.navigate(ROUTE_HOME) },
+            ) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(

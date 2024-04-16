@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase
 class AuthViewModel (
     var navController: NavController,
     var context: Context
-){
+) {
     var mAuth: FirebaseAuth
     var progress: ProgressDialog
 
@@ -29,39 +29,51 @@ class AuthViewModel (
     fun signup(
         email: String,
         pass: String,
-        confpass: String
-    ){
+        confpass: String,
+    ) {
         progress.show()
         if (email.isBlank() || pass.isBlank() || confpass.isBlank()) {
             progress.dismiss()
-            Toast.makeText(context, "Email and Password should not be blank", Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(context, "Email and Password should not be blank", Toast.LENGTH_LONG).show()
             return
-        }else if (pass != confpass){
+        }else if (pass != confpass) {
+            progress.dismiss()
             Toast.makeText(context, "Passwords do not match", Toast.LENGTH_LONG).show()
-        }else{
-            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener {
-                if (it.isSuccessful){
+            navController.navigate(ROUTE_REGISTER)
+            return
+        }else {
+            mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     val userdata = User(email, pass, mAuth.currentUser!!.uid)
-                    val regRef = FirebaseDatabase.getInstance().getReference().child("Users/"+mAuth.currentUser!!.uid)
-                    regRef.setValue(userdata).addOnCompleteListener{
-                        if (it.isSuccessful) {
+                    val regRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.currentUser!!.uid)
+                    regRef.setValue(userdata).addOnCompleteListener { dataTask ->
+                        if (dataTask.isSuccessful) {
+                            progress.dismiss()
                             Toast.makeText(context, "Registered Successfully", Toast.LENGTH_LONG).show()
                             navController.navigate(ROUTE_HOME)
-                        }else{
-                            Toast.makeText(context, "${it.exception!!.message}", Toast.LENGTH_LONG).show()
+                        } else {
+                            progress.dismiss()
+                            Toast.makeText(context, "${dataTask.exception!!.message}", Toast.LENGTH_LONG).show()
                             navController.navigate(ROUTE_LOGIN)
                         }
                     }
-                }else{
-                    Toast.makeText(context, "Could not Register, Retry", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
+                    navController.navigate(ROUTE_HOME)
+                    progress.dismiss()
+                } else {
+                    progress.dismiss()
+                    val errorMessage = task.exception?.message ?: "Could not Register, Retry"
+                    if (errorMessage.contains("email address is already in use")) {
+                        Toast.makeText(context, "Email address is already registered", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show()
+                    }
                     navController.navigate(ROUTE_REGISTER)
                 }
             }
-
         }
-
     }
+
 
     fun login(
         email: String,
