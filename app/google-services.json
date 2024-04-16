@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "992930353456",
+    "project_id": "apollo-13876",
+    "storage_bucket": "apollo-13876.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992930353456:android:fd55f1186c82cbf465b8f5",
+        "android_client_info": {
+          "package_name": "com.example.apollo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtR-1dcjVoAoS3JabjznFsppJ4_ZwMHiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
