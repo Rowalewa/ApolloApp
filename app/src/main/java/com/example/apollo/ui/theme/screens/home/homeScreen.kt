@@ -1,7 +1,10 @@
 package com.example.apollo.ui.theme.screens.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -11,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,7 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.apollo.R
 import com.example.apollo.navigation.ROUTE_ABOUT
+import com.example.apollo.navigation.ROUTE_ADD_PRODUCTS
 import com.example.apollo.navigation.ROUTE_CONTACTS
 import com.example.apollo.navigation.ROUTE_LOGIN
 import com.example.apollo.navigation.ROUTE_REGISTER
@@ -27,6 +33,11 @@ import com.example.apollo.ui.theme.ApolloTheme
 
 @Composable
 fun HomeScreen(navController: NavController){
+    Box {
+        Image(painter = painterResource(id = R.drawable.home),
+            contentDescription = "home background",
+            modifier = Modifier.fillMaxSize())
+    }
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier// padding(
@@ -35,7 +46,7 @@ fun HomeScreen(navController: NavController){
 //            bottom = 0.dp,
 //            top = 0.dp
 //        )
-            .background(color = Color.Red),
+//            .background(color = Color.Red)
     ) {
         Text(
             text = "Home Screen",
@@ -113,9 +124,10 @@ fun HomeScreen(navController: NavController){
 //            )
 //        }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(ROUTE_ADD_PRODUCTS) },
             colors = ButtonDefaults.buttonColors(Color.Yellow),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     top = 0.dp,
                     start = 10.dp,
@@ -132,7 +144,8 @@ fun HomeScreen(navController: NavController){
         Button(
             onClick = { /*TODO*/ },
             colors = ButtonDefaults.buttonColors(Color.Black),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     top = 0.dp,
                     start = 10.dp,

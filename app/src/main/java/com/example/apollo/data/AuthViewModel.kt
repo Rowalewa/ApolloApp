@@ -57,9 +57,6 @@ class AuthViewModel (
                             navController.navigate(ROUTE_LOGIN)
                         }
                     }
-                    Toast.makeText(context, "Successfully Registered", Toast.LENGTH_LONG).show()
-                    navController.navigate(ROUTE_HOME)
-                    progress.dismiss()
                 } else {
                     progress.dismiss()
                     val errorMessage = task.exception?.message ?: "Could not Register, Retry"

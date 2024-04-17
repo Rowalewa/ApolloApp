@@ -7,9 +7,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -22,18 +24,25 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.navigation.ROUTE_HOME
+import com.example.apollo.navigation.ROUTE_REGISTER
 import com.example.apollo.ui.theme.ApolloTheme
 
 @Composable
 fun LoginScreen(navController: NavController){
+    var email by remember { mutableStateOf(TextFieldValue("")) }
+    var pass by remember { mutableStateOf(TextFieldValue("")) }
+    var context= LocalContext.current
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.background(color = Color.Yellow)
@@ -46,10 +55,27 @@ fun LoginScreen(navController: NavController){
             fontFamily = FontFamily.Cursive
         )
         Spacer(modifier = Modifier.height(40.dp))
-        TextFieldComponent(myLabel = "Enter your email address")
+        OutlinedTextField(
+            value =email ,
+            onValueChange = {email=it},
+            label = { Text(text = "Enter Email") },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+
+            )
         Spacer(modifier = Modifier.height(20.dp))
-        TextFieldComponent(myLabel = "Enter your Password")
-        Spacer(modifier = Modifier.height(50.dp))
+
+        OutlinedTextField(value =pass , onValueChange = {pass=it},
+            label = { Text(text = "Enter Password") },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+
         Button(onClick = { navController.navigate(ROUTE_HOME) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,6 +93,44 @@ fun LoginScreen(navController: NavController){
                 color = Color.Magenta
             )
         }
+        Button(onClick = {
+
+        }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 20.dp,
+                end = 20.dp,
+                top = 0.dp,
+                bottom = 0.dp
+            )) {
+            Text(text = "Log In",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif,
+                color = Color.Magenta
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
+        Text(text = "Don't have account? Click to Register")
+        Button(onClick = {
+            navController.navigate(ROUTE_REGISTER)
+        }, modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = 20.dp,
+                end = 20.dp,
+                top = 0.dp,
+                bottom = 0.dp
+            ),
+            colors = ButtonDefaults.buttonColors(Color.Blue)) {
+            Text(text = "Register",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif,
+                color = Color.Magenta
+            )
+        }
+
     }
 }
 @OptIn(ExperimentalMaterial3Api::class)
