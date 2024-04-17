@@ -27,7 +27,7 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
             navController.navigate(ROUTE_LOGIN)
         }
         progress = ProgressDialog(context)
-        progress.setTitle("Loading")
+        progress.setTitle("Saving \uD83D\uDCBE")
         progress.setMessage("Please wait...")
     }
 
