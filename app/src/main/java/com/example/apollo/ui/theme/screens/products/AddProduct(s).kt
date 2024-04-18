@@ -70,12 +70,14 @@ fun AddProductsScreen(navController: NavHostController) {
             value = productName,
             onValueChange = { productName = it },
             label = { Text(text = "Product name *") },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White,
+            colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Blue,
                 unfocusedTextColor = Color.Cyan,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedLabelColor = Color.Green,
-                unfocusedLabelColor = Color.Magenta
+                unfocusedLabelColor = Color.Magenta,
             ),
             modifier = Modifier.fillMaxWidth()
                 .padding(
@@ -93,12 +95,14 @@ fun AddProductsScreen(navController: NavHostController) {
             value = productQuantity,
             onValueChange = { productQuantity = it },
             label = { Text(text = "Product quantity *") },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White,
+            colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Blue,
                 unfocusedTextColor = Color.Cyan,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedLabelColor = Color.Green,
-                unfocusedLabelColor = Color.Magenta
+                unfocusedLabelColor = Color.Magenta,
             ),
             modifier = Modifier.fillMaxWidth()
                 .padding(
@@ -116,12 +120,14 @@ fun AddProductsScreen(navController: NavHostController) {
             value = productPrice,
             onValueChange = { productPrice = it },
             label = { Text(text = "Product price *") },
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.White,
+            colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Blue,
                 unfocusedTextColor = Color.Cyan,
+                focusedContainerColor = Color.White,
+                unfocusedContainerColor = Color.White,
+                disabledContainerColor = Color.White,
                 focusedLabelColor = Color.Green,
-                unfocusedLabelColor = Color.Magenta
+                unfocusedLabelColor = Color.Magenta,
             ),
             modifier = Modifier.fillMaxWidth()
                 .padding(

@@ -60,7 +60,7 @@ fun RegisterScreen(navController: NavController) {
     }
     var context = LocalContext.current
 
-    Box() {
+    Box {
         Image(
             painter = painterResource(id = R.drawable.curved_wallpaper),
             contentDescription = "curved background",
