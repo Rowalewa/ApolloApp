@@ -11,12 +11,14 @@ import com.example.apollo.ui.theme.screens.contact.ContactScreen
 import com.example.apollo.ui.theme.screens.home.HomeScreen
 import com.example.apollo.ui.theme.screens.login.LoginScreen
 import com.example.apollo.ui.theme.screens.products.AddProductsScreen
+import com.example.apollo.ui.theme.screens.products.UpdateProductsScreen
+import com.example.apollo.ui.theme.screens.products.ViewProductsScreen
 import com.example.apollo.ui.theme.screens.register.RegisterScreen
 
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier,
                navController: NavHostController = rememberNavController(),
-               startDestination: String = ROUTE_REGISTER
+               startDestination: String = ROUTE_LOGIN
 ) {
     NavHost(
         navController = navController,
@@ -38,8 +40,14 @@ fun AppNavHost(modifier: Modifier = Modifier,
         composable(ROUTE_CONTACTS){
             ContactScreen(navController)
         }
-        composable(ROUTE_ADD_PRODUCTS){
+        composable(ROUTE_ADD_PRODUCT){
             AddProductsScreen(navController)
+        }
+        composable("$ROUTE_UPDATE_PRODUCT/{id}"){ passedData ->
+            UpdateProductsScreen(navController, passedData.arguments?.getString("id")!!)
+        }
+        composable(ROUTE_VIEW_PRODUCT){
+            ViewProductsScreen(navController)
         }
     }
 }

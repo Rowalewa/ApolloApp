@@ -13,4 +13,6 @@ class Product{
         this.id=id
 
     }
+
+    constructor()
 }

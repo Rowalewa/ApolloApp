@@ -24,10 +24,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.R
 import com.example.apollo.navigation.ROUTE_ABOUT
-import com.example.apollo.navigation.ROUTE_ADD_PRODUCTS
+import com.example.apollo.navigation.ROUTE_ADD_PRODUCT
 import com.example.apollo.navigation.ROUTE_CONTACTS
 import com.example.apollo.navigation.ROUTE_LOGIN
 import com.example.apollo.navigation.ROUTE_REGISTER
+import com.example.apollo.navigation.ROUTE_UPDATE_PRODUCT
+import com.example.apollo.navigation.ROUTE_VIEW_PRODUCT
 import com.example.apollo.ui.theme.ApolloTheme
 
 
@@ -124,7 +126,7 @@ fun HomeScreen(navController: NavController){
 //            )
 //        }
         Button(
-            onClick = { navController.navigate(ROUTE_ADD_PRODUCTS) },
+            onClick = { navController.navigate(ROUTE_ADD_PRODUCT) },
             colors = ButtonDefaults.buttonColors(Color.Yellow),
             modifier = Modifier
                 .fillMaxWidth()
@@ -142,7 +144,7 @@ fun HomeScreen(navController: NavController){
             )
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(ROUTE_VIEW_PRODUCT) },
             colors = ButtonDefaults.buttonColors(Color.Black),
             modifier = Modifier
                 .fillMaxWidth()
@@ -159,6 +161,24 @@ fun HomeScreen(navController: NavController){
                 color = Color.White
             )
         }
+//        Button(
+//            onClick = { navController.navigate(ROUTE_UPDATE_PRODUCT) },
+//            colors = ButtonDefaults.buttonColors(Color.Magenta),
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(
+//                    top = 0.dp,
+//                    start = 10.dp,
+//                    end = 20.dp,
+//                    bottom = 0.dp
+//                )
+//        ) {
+//            Text(text = "Update Product",
+//                fontSize = 20.sp,
+//                fontWeight = FontWeight.ExtraBold,
+//                color = Color.Blue
+//            )
+//        }
     }
 }
 

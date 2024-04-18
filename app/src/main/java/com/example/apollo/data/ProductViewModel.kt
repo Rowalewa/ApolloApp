@@ -9,7 +9,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.navigation.NavHostController
 import com.example.apollo.models.Product
-import com.example.apollo.navigation.ROUTE_ADD_PRODUCTS
+import com.example.apollo.navigation.ROUTE_ADD_PRODUCT
 import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.navigation.ROUTE_LOGIN
 import com.google.firebase.database.DataSnapshot
@@ -41,7 +41,7 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
             progress.dismiss()
             if (it.isSuccessful) {
                 Toast.makeText(context, "Saving successful", Toast.LENGTH_SHORT).show()
-                navController.navigate(ROUTE_ADD_PRODUCTS)
+                navController.navigate(ROUTE_ADD_PRODUCT)
             } else {
                 Toast.makeText(context, "ERROR: ${it.exception!!.message}", Toast.LENGTH_SHORT).show()
                 navController.navigate(ROUTE_HOME)
@@ -55,10 +55,10 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
     ): SnapshotStateList<Product> {
         var ref = FirebaseDatabase.getInstance().getReference().child("Products")
 
-        progress.show()
+//        progress.show()
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                progress.dismiss()
+//                progress.dismiss()
                 products.clear()
                 for (snap in snapshot.children) {
                     val value = snap.getValue(Product::class.java)
@@ -75,11 +75,10 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
     }
 
     fun deleteProduct(id: String) {
-        var delRef = FirebaseDatabase.getInstance().getReference()
-            .child("Products/$id")
-        progress.show()
+        var delRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+//        progress.show()
         delRef.removeValue().addOnCompleteListener {
-            progress.dismiss()
+//            progress.dismiss()
             if (it.isSuccessful) {
                 Toast.makeText(context, "Product deleted", Toast.LENGTH_SHORT).show()
             } else {
@@ -89,12 +88,11 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
     }
 
     fun updateProduct(name: String, quantity: String, price: String, id: String) {
-        var updateRef = FirebaseDatabase.getInstance().getReference()
-            .child("Products/$id")
-        progress.show()
+        var updateRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+//        progress.show()
         var updateData = Product(name, quantity, price, id)
         updateRef.setValue(updateData).addOnCompleteListener {
-            progress.dismiss()
+//            progress.dismiss()
             if (it.isSuccessful) {
                 Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show()
             } else {
