@@ -4,10 +4,12 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,6 +33,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.data.ProductViewModel
 import com.example.apollo.models.Product
+import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.ui.theme.ApolloTheme
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -111,6 +114,23 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
 
         }) {
             Text(text = "Update")
+        }
+
+        Button(onClick = { navController.navigate(ROUTE_HOME) },
+            colors = ButtonDefaults.buttonColors(Color.Blue),
+            modifier = Modifier.fillMaxWidth()
+                .padding(
+                    start = 20.dp,
+                    end = 20.dp,
+                    top = 0.dp,
+                    bottom = 0.dp
+                )) {
+            Text(
+                text = "Back to Home Screen",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = FontFamily.Serif
+            )
         }
 
     }

@@ -12,6 +12,7 @@ import com.example.apollo.models.Product
 import com.example.apollo.navigation.ROUTE_ADD_PRODUCT
 import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.navigation.ROUTE_LOGIN
+import com.example.apollo.navigation.ROUTE_VIEW_PRODUCT
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -95,6 +96,7 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
 //            progress.dismiss()
             if (it.isSuccessful) {
                 Toast.makeText(context, "Update successful", Toast.LENGTH_SHORT).show()
+                navController.navigate(ROUTE_VIEW_PRODUCT)
             } else {
                 Toast.makeText(context, it.exception!!.message, Toast.LENGTH_SHORT).show()
             }
