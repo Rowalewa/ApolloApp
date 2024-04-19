@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
@@ -39,10 +38,7 @@ import com.example.apollo.data.ProductViewModel
 import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.ui.theme.ApolloTheme
 
-//import com.example.firebaseauth.data.productviewmodel
-//import com.example.firebaseauth.navigation.ROUTE_VIEW_PRODUCT
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddProductsScreen(navController: NavHostController) {
     Box {
@@ -52,7 +48,7 @@ fun AddProductsScreen(navController: NavHostController) {
     }
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        var context = LocalContext.current
+        val context = LocalContext.current
         Text(
             text = "Add Product",
             fontSize = 30.sp,

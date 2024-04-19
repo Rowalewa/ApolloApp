@@ -1,7 +1,6 @@
 package com.example.apollo.ui.theme.screens.login
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,14 +8,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,7 +21,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -40,16 +35,14 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.R
 import com.example.apollo.data.AuthViewModel
-import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.navigation.ROUTE_REGISTER
 import com.example.apollo.ui.theme.ApolloTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController){
     var email by remember { mutableStateOf(TextFieldValue("")) }
     var pass by remember { mutableStateOf(TextFieldValue("")) }
-    var context= LocalContext.current
+    val context= LocalContext.current
     Box {
         Image(painter = painterResource(id = R.drawable.dies),
             contentDescription = "log in background",
@@ -72,10 +65,12 @@ fun LoginScreen(navController: NavController){
             value =email ,
             onValueChange = {email=it},
             label = { Text(text = "Enter Email") },
-            colors = TextFieldDefaults.textFieldColors(
+            colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Blue,
                 unfocusedTextColor = Color.Red,
-                containerColor = Color.Transparent
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
             ),
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
             modifier = Modifier
@@ -88,10 +83,12 @@ fun LoginScreen(navController: NavController){
         OutlinedTextField(value =pass , onValueChange = {pass=it},
             label = { Text(text = "Enter Password") },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Next),
-            colors = TextFieldDefaults.textFieldColors(
+            colors = TextFieldDefaults.colors(
                 focusedTextColor = Color.Blue,
                 unfocusedTextColor = Color.Red,
-                containerColor = Color.Transparent
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                disabledContainerColor = Color.Transparent,
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -162,35 +159,6 @@ fun LoginScreen(navController: NavController){
         }
 
     }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TextFieldComponent(myLabel: String){
-    var text by remember {
-        mutableStateOf(value = "")
-    } // enabling text input
-    TextField(modifier = Modifier
-        .fillMaxWidth()
-        .padding(
-            start = 20.dp,
-            end = 20.dp,
-            top = 0.dp,
-            bottom = 0.dp
-        )
-        .clip(
-            shape = RoundedCornerShape(20.dp)
-        ),
-        colors = TextFieldDefaults.textFieldColors(Color.Magenta),
-        value = text, onValueChange = {
-                newText -> text = newText // does the observation of the input field
-        },
-        label = { TextFieldLabels(value = myLabel)})  // label
-}
-@Composable
-fun TextFieldLabels(value: String){
-    Text(text = value,
-        color = Color.Red
-    )
 }
 @Preview(
     showSystemUi = true,

@@ -2,23 +2,17 @@ package com.example.apollo.ui.theme.screens.register
 
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,7 +20,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -42,9 +35,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.R
 import com.example.apollo.data.AuthViewModel
-import com.example.apollo.navigation.ROUTE_HOME
 import com.example.apollo.navigation.ROUTE_LOGIN
-import com.example.apollo.navigation.ROUTE_REGISTER
 import com.example.apollo.ui.theme.ApolloTheme
 
 @Composable
@@ -58,7 +49,7 @@ fun RegisterScreen(navController: NavController) {
     var confpass by remember {
         mutableStateOf(TextFieldValue(""))
     }
-    var context = LocalContext.current
+    val context = LocalContext.current
 
     Box {
         Image(
@@ -118,8 +109,8 @@ fun RegisterScreen(navController: NavController) {
                 .padding(8.dp)
         )
         Button(onClick = {
-            val myregister = AuthViewModel(navController, context)
-            myregister.signup(
+            val myRegister = AuthViewModel(navController, context)
+            myRegister.signup(
                 email.text.trim(),
                 pass.text.trim(),
                 confpass.text.trim()
@@ -165,41 +156,6 @@ fun RegisterScreen(navController: NavController) {
         }
         Spacer(modifier = Modifier.height(10.dp))
     }
-}
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TextFieldComponent(myLabel: String){
-    var text by remember {
-        mutableStateOf(value = "")
-    } // enabling text input
-    TextField(modifier = Modifier
-        .fillMaxWidth()
-        .padding(
-            start = 20.dp,
-            end = 20.dp,
-            top = 0.dp,
-            bottom = 0.dp
-        )
-        .clip(
-            shape = RoundedCornerShape(20.dp)
-        )
-        .background(color = Color.Red),
-        value = text, onValueChange = {
-                newText -> text = newText // does the observation of the input field
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            containerColor = Color.White,
-            cursorColor = Color.Magenta,
-            disabledLabelColor = Color.Blue,
-            focusedTextColor = Color.Blue,
-            unfocusedTextColor = Color.Cyan
-        ),
-        label = { TextFieldLabels(value = myLabel)})  // label
-}
-@Composable
-fun TextFieldLabels(value: String){
-    Text(text = value
-    )
 }
 
 @Preview(

@@ -44,19 +44,19 @@ import com.google.firebase.database.ValueEventListener
 fun UpdateProductsScreen(navController: NavHostController, id:String) {
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        var context = LocalContext.current
+        val context = LocalContext.current
         var name by remember { mutableStateOf("") }
         var quantity by remember { mutableStateOf("") }
         var price by remember { mutableStateOf("") }
 
-        var currentDataRef = FirebaseDatabase.getInstance().getReference()
+        val currentDataRef = FirebaseDatabase.getInstance().getReference()
             .child("Products/$id")
         currentDataRef.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                var product = snapshot.getValue(Product::class.java)
+                val product = snapshot.getValue(Product::class.java)
                 name = product!!.name
-                quantity = product!!.quantity
-                price = product!!.price
+                quantity = product.quantity
+                price = product.price
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -107,7 +107,7 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
 
         Button(onClick = {
             //-----------WRITE THE UPDATE LOGIC HERE---------------//
-            var productRepository = ProductViewModel(navController, context)
+            val productRepository = ProductViewModel(navController, context)
             productRepository.updateProduct(productName.text.trim(),productQuantity.text.trim(),
                 productPrice.text.trim(),id)
 

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.apollo.data
 
 
@@ -19,11 +21,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class ProductViewModel(var navController: NavHostController, var context: Context) {
-    var authRepository: AuthViewModel
-    var progress: ProgressDialog
+    private var authRepository: AuthViewModel = AuthViewModel(navController, context)
+    private var progress: ProgressDialog
 
     init {
-        authRepository = AuthViewModel(navController, context)
         if (!authRepository.isloggedin()) {
             navController.navigate(ROUTE_LOGIN)
         }
@@ -34,9 +35,9 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
 
 
     fun saveProduct(productName: String, productQuantity: String, productPrice: String) {
-        var id = System.currentTimeMillis().toString()
-        var productData = Product(productName, productQuantity, productPrice, id)
-        var productRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+        val id = System.currentTimeMillis().toString()
+        val productData = Product(productName, productQuantity, productPrice, id)
+        val productRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
         progress.show()
         productRef.setValue(productData).addOnCompleteListener {
             progress.dismiss()
@@ -54,7 +55,7 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
         product: MutableState<Product>,
         products: SnapshotStateList<Product>
     ): SnapshotStateList<Product> {
-        var ref = FirebaseDatabase.getInstance().getReference().child("Products")
+        val ref = FirebaseDatabase.getInstance().getReference().child("Products")
 
 //        progress.show()
         ref.addValueEventListener(object : ValueEventListener {
@@ -76,7 +77,7 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
     }
 
     fun deleteProduct(id: String) {
-        var delRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+        val delRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
 //        progress.show()
         delRef.removeValue().addOnCompleteListener {
 //            progress.dismiss()
@@ -89,9 +90,9 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
     }
 
     fun updateProduct(name: String, quantity: String, price: String, id: String) {
-        var updateRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+        val updateRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
 //        progress.show()
-        var updateData = Product(name, quantity, price, id)
+        val updateData = Product(name, quantity, price, id)
         updateRef.setValue(updateData).addOnCompleteListener {
 //            progress.dismiss()
             if (it.isSuccessful) {

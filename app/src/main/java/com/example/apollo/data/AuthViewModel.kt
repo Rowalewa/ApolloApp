@@ -18,12 +18,10 @@ class AuthViewModel (
     var navController: NavController,
     var context: Context
 ) {
-    var mAuth: FirebaseAuth
-    var progress: ProgressDialog
+    private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+    private var progress: ProgressDialog = ProgressDialog(context)
 
     init {
-        mAuth = FirebaseAuth.getInstance()
-        progress = ProgressDialog(context)
         progress.setTitle("Loading...\uD83D\uDEE0\uFE0F ")
         progress.setMessage("Please wait for a moment")
     }
