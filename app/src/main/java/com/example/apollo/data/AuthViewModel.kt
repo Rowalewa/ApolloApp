@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.apollo.data
 
 import android.app.ProgressDialog
@@ -92,6 +94,7 @@ class AuthViewModel (
     fun logout(){
         mAuth.signOut()
         navController.navigate(ROUTE_LOGIN)
+        Toast.makeText(context, "Successfully logged out", Toast.LENGTH_LONG).show()
     }
 
     fun isloggedin(): Boolean{
