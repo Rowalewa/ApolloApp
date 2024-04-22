@@ -1,5 +1,10 @@
 package com.example.apollo.ui.theme.screens.products
 
+import android.content.Context
+import android.net.Uri
+import android.provider.MediaStore
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -22,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
@@ -35,12 +43,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.apollo.R
 import com.example.apollo.data.ProductViewModel
+import com.example.apollo.navigation.ROUTE_ADD_PRODUCT
 import com.example.apollo.navigation.ROUTE_HOME
+import com.example.apollo.navigation.ROUTE_VIEW_UPLOAD_SCREEN
 import com.example.apollo.ui.theme.ApolloTheme
 
 
 @Composable
 fun AddProductsScreen(navController: NavHostController) {
+    val context = LocalContext.current
     Box {
         Image(painter = painterResource(id = R.drawable.add_product),
             contentDescription = "add product background",
@@ -48,7 +59,6 @@ fun AddProductsScreen(navController: NavHostController) {
     }
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
-        val context = LocalContext.current
         Text(
             text = "Add Product",
             fontSize = 30.sp,
@@ -75,7 +85,8 @@ fun AddProductsScreen(navController: NavHostController) {
                 focusedLabelColor = Color.Green,
                 unfocusedLabelColor = Color.Magenta,
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 10.dp,
                     end = 10.dp,
@@ -100,7 +111,8 @@ fun AddProductsScreen(navController: NavHostController) {
                 focusedLabelColor = Color.Green,
                 unfocusedLabelColor = Color.Magenta,
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 20.dp,
                     end = 20.dp,
@@ -125,7 +137,8 @@ fun AddProductsScreen(navController: NavHostController) {
                 focusedLabelColor = Color.Green,
                 unfocusedLabelColor = Color.Magenta,
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 30.dp,
                     end = 30.dp,
@@ -146,11 +159,12 @@ fun AddProductsScreen(navController: NavHostController) {
 
         },
             colors = ButtonDefaults.buttonColors(Color.Blue),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 40.dp,
                     end = 40.dp,
-                    top  = 0.dp,
+                    top = 0.dp,
                     bottom = 0.dp
                 )) {
             Text(
@@ -163,7 +177,8 @@ fun AddProductsScreen(navController: NavHostController) {
         }
         Button(onClick = { navController.navigate(ROUTE_HOME) },
             colors = ButtonDefaults.buttonColors(Color.Green),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 20.dp,
                     end = 20.dp,
@@ -178,10 +193,87 @@ fun AddProductsScreen(navController: NavHostController) {
                 color = Color.Blue
             )
         }
-
+        Spacer(modifier = Modifier.height(10.dp))
+        ImagePicker(Modifier,
+            context,
+            navController,
+            productName.text.trim(),
+            productQuantity.text.trim(),
+            productPrice.text.trim()
+        )
     }
 }
+@Composable
+fun ImagePicker(modifier: Modifier = Modifier,
+                context: Context,
+                navController: NavHostController,
+                name:String,
+                quantity:String,
+                price:String
+) {
+    var hasImage by remember { mutableStateOf(false) }
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
 
+    val imagePicker = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent(),
+        onResult = { uri ->
+            hasImage = uri != null
+            imageUri = uri
+        }
+    )
+
+    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+        if (hasImage && imageUri != null) {
+            val bitmap = MediaStore.Images.Media.
+            getBitmap(context.contentResolver,imageUri)
+            Image(
+                bitmap = bitmap.asImageBitmap(),
+                contentDescription = "Selected image",
+                modifier = Modifier.padding(
+                    start = 20.dp,
+                    end = 20.dp,
+                    top = 0.dp,
+                    bottom = 0.dp
+                ))
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Button(
+                onClick = {
+                    imagePicker.launch("image/*")
+                }
+            ) {
+                Text(
+                    text = "Select Image"
+                )
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Button(onClick = {
+                //-----------WRITE THE UPLOAD LOGIC HERE---------------//
+                val productRepository = ProductViewModel(navController,context)
+                productRepository.saveProductWithImage(name, quantity, price, imageUri!!)
+
+            }) {
+                Text(text = "Upload")
+            }
+            Button(onClick = {
+                //-----------WRITE THE UPLOAD LOGIC HERE---------------//
+
+                navController.navigate(ROUTE_VIEW_UPLOAD_SCREEN)
+
+            }) {
+                Text(text = "view uploads")
+            }
+
+        }
+    }
+}
 @Preview(
     showBackground = true,
     showSystemUi = true,

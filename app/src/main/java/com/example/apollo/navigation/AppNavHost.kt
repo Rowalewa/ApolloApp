@@ -13,6 +13,7 @@ import com.example.apollo.ui.theme.screens.login.LoginScreen
 import com.example.apollo.ui.theme.screens.products.AddProductsScreen
 import com.example.apollo.ui.theme.screens.products.UpdateProductsScreen
 import com.example.apollo.ui.theme.screens.products.ViewProductsScreen
+import com.example.apollo.ui.theme.screens.products.ViewUploadsScreen
 import com.example.apollo.ui.theme.screens.register.RegisterScreen
 
 @Composable
@@ -48,6 +49,9 @@ fun AppNavHost(modifier: Modifier = Modifier,
         }
         composable(ROUTE_VIEW_PRODUCT){
             ViewProductsScreen(navController)
+        }
+        composable(ROUTE_VIEW_UPLOAD_SCREEN){
+            ViewUploadsScreen(navController)
         }
     }
 }

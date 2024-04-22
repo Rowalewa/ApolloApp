@@ -1,6 +1,8 @@
 package com.example.apollo.ui.theme.screens.products
 
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,6 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.apollo.R
 import com.example.apollo.data.ProductViewModel
 import com.example.apollo.models.Product
 import com.example.apollo.navigation.ROUTE_HOME
@@ -42,6 +46,12 @@ import com.google.firebase.database.ValueEventListener
 
 @Composable
 fun UpdateProductsScreen(navController: NavHostController, id:String) {
+    Box {
+        Image(painter = painterResource(id = R.drawable.update_product),
+            contentDescription = "update product background",
+            modifier = Modifier.fillMaxSize()
+        )
+    }
     Column(modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally) {
         val context = LocalContext.current
@@ -49,8 +59,7 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
         var quantity by remember { mutableStateOf("") }
         var price by remember { mutableStateOf("") }
 
-        val currentDataRef = FirebaseDatabase.getInstance().getReference()
-            .child("Products/$id")
+        val currentDataRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
         currentDataRef.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val product = snapshot.getValue(Product::class.java)
@@ -81,7 +90,11 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
         OutlinedTextField(
             value = productName,
             onValueChange = { productName = it },
-            label = { Text(text = "Product name *") },
+            label = {
+                Text(
+                    text = "Product name *"
+                )
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
         )
 
@@ -118,7 +131,8 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
 
         Button(onClick = { navController.navigate(ROUTE_HOME) },
             colors = ButtonDefaults.buttonColors(Color.Blue),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(
                     start = 20.dp,
                     end = 20.dp,
