@@ -7,6 +7,7 @@ package com.example.apollo.data
 import android.app.ProgressDialog
 import android.content.Context
 import android.net.Uri
+import android.view.Gravity
 import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.snapshots.SnapshotStateList
@@ -120,7 +121,11 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
             progress.show()
             if (productName.isBlank() || productPrice.isBlank() || productQuantity.isBlank()){
                 progress.dismiss()
-                Toast.makeText(context, "Fill all the fields please", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Fill all the fields please", Toast.LENGTH_LONG).apply {
+                    setGravity(Gravity.CENTER, 0, 0)
+                    show()
+                }
+                // making a toast appear at the center of screen without using a variable
                 navController.navigate(ROUTE_ADD_PRODUCT)
             } else if (it.isSuccessful){
                 progress.dismiss()
@@ -135,7 +140,10 @@ class ProductViewModel(var navController: NavHostController, var context: Contex
                     )
                     val dbRef = FirebaseDatabase.getInstance().getReference().child("Uploads/$id")
                     dbRef.setValue(houseData)
-                    Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT).show()
+                    val toast = Toast.makeText(context, "Upload successful", Toast.LENGTH_SHORT)
+                    toast.setGravity(Gravity.CENTER, 0, 0)
+                    toast.show()
+                    // this is for making a toast centered on screen using variable
                     navController.navigate(ROUTE_VIEW_UPLOAD_SCREEN)
                 }
             }else{
