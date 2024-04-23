@@ -95,24 +95,6 @@ fun LoginScreen(navController: NavController){
                 .padding(8.dp)
         )
         Spacer(modifier = Modifier.height(20.dp))
-
-//        Button(onClick = { navController.navigate(ROUTE_HOME) },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(
-//                    start = 20.dp,
-//                    end = 20.dp,
-//                    top = 0.dp,
-//                    bottom = 0.dp
-//                ),
-//            colors = ButtonDefaults.buttonColors(Color.Green)) {
-//            Text(text = "Back to Home",
-//                fontSize = 20.sp,
-//                fontWeight = FontWeight.Bold,
-//                fontFamily = FontFamily.Serif,
-//                color = Color.Magenta
-//            )
-//        }
         Button(onClick = {
             val myLogin = AuthViewModel(navController, context)
             myLogin.login(

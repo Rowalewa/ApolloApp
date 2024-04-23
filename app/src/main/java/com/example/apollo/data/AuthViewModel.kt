@@ -54,7 +54,7 @@ class AuthViewModel (
                         } else {
                             progress.dismiss()
                             Toast.makeText(context, "${dataTask.exception!!.message}", Toast.LENGTH_LONG).show()
-                            navController.navigate(ROUTE_LOGIN)
+//                            navController.navigate(ROUTE_LOGIN)
                         }
                     }
                 } else {
