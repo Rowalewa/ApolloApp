@@ -2,6 +2,7 @@ package com.example.apollo.ui.theme.screens.products
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +15,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -88,7 +90,7 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
         var productPrice by remember { mutableStateOf(TextFieldValue(price)) }
 
         OutlinedTextField(
-            value = productName,
+            value =  productName ,
             onValueChange = { productName = it },
             label = {
                 Text(
@@ -117,6 +119,25 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
+        var currentProduct by remember { mutableStateOf(Product("", "", "", "")) }
+
+        val currentProductDataRef = FirebaseDatabase.getInstance().getReference().child("Products/$id")
+        currentProductDataRef.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val product = snapshot.getValue(Product::class.java)
+                currentProduct = product ?: Product("", "", "", "")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+        DisplayProducts(
+            name =currentProduct.name ,
+            price = currentProduct.price,
+            quantity = currentProduct.quantity,
+            id = currentProduct.id
+        )
 
         Button(onClick = {
             //-----------WRITE THE UPDATE LOGIC HERE---------------//
@@ -147,6 +168,26 @@ fun UpdateProductsScreen(navController: NavHostController, id:String) {
             )
         }
 
+    }
+}
+@Composable
+fun DisplayProducts(
+    name: String,
+    price: String,
+    quantity: String,
+    id: String
+){
+    Column (
+        modifier = Modifier.background(color = Color.Black)
+    ){
+//        Text(text = "Name: $name")
+//        Text(text = "Price: $price")
+//        Text(text = "Quantity: $quantity")
+//        Text(text = "Id: $id")
+        TextField(value = "Name: $name", onValueChange = {}, readOnly = true)
+        TextField(value = "Price: Ksh$price", onValueChange = {}, readOnly = true)
+        TextField(value = "Quantity: $quantity", onValueChange = {}, readOnly = true)
+        TextField(value = "ProductId: $id", onValueChange = {}, readOnly = true)
     }
 }
 

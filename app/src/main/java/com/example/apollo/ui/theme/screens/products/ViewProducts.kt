@@ -67,13 +67,15 @@ fun ViewProductsScreen(navController:NavHostController) {
             Text(text = "All products",
                 fontSize = 30.sp,
                 fontFamily = FontFamily.Cursive,
-                color = Color.Red)
+                color = Color.Red
+            )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             Button(onClick = { navController.navigate(ROUTE_HOME) },
                 colors = ButtonDefaults.buttonColors(Color.Blue),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .padding(
                         start = 20.dp,
                         end = 20.dp,
@@ -89,7 +91,6 @@ fun ViewProductsScreen(navController:NavHostController) {
             }
 
             Spacer(modifier = Modifier.height(10.dp))
-
             LazyColumn(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.padding(
@@ -181,6 +182,7 @@ fun ProductItem(name:String,
     }
 
 }
+
 
 @Preview(
     showSystemUi = true,
